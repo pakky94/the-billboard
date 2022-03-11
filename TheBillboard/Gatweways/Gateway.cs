@@ -1,11 +1,20 @@
-﻿using TheBillboard.Abstract;
+﻿using Microsoft.Extensions.Options;
+using TheBillboard.Abstract;
+using TheBillboard.Options;
 
 namespace TheBillboard.Gatweways;
 
 public class Gateway : IGateway
 {
+    private readonly AppOptions _options;
+
+    public Gateway(IOptions<AppOptions> options)
+    {
+        _options = options.Value;
+    }
+    
     public IEnumerable<string> GetStudents()
     {
-        return new[] {"Sebastian", "Doriano", "Elia", "Igor", "Marco", "Michele", "Luca", "Giacomo"};
+        return _options.Students;
     }
 }

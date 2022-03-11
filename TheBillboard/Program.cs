@@ -1,10 +1,23 @@
+using Microsoft.Extensions.Options;
 using TheBillboard.Abstract;
 using TheBillboard.Gatweways;
+using TheBillboard.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<IGateway, Gateway>();
+builder.Services
+    .AddOptions<AppOptions>()
+    .Bind(builder.Configuration.GetSection("AppOptions"))
+    .ValidateDataAnnotations();
+
+builder.Services.AddSingleton<IGateway>(provider =>
+    {
+        var options = provider.GetRequiredService<IOptions<AppOptions>>();
+        return new Gateway(options);
+    }
+);
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
