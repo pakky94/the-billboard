@@ -1,6 +1,10 @@
+using TheBillboard.Abstract;
+using TheBillboard.Gatweways;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<IGateway, Gateway>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

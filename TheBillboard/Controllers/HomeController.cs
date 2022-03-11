@@ -11,10 +11,10 @@ public class HomeController : Controller
     private readonly ILogger<HomeController> _logger;
     private readonly IGateway _gateway;
     
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IGateway gateway, ILogger<HomeController> logger)
     {
         _logger = logger;
-        _gateway = new Gateway();
+        _gateway = gateway;
     }
 
     public IActionResult Index()
@@ -37,6 +37,4 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
-
-    
 }
