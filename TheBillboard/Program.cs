@@ -14,7 +14,9 @@ builder.Services
 builder.Services.AddSingleton<IGateway>(provider =>
     {
         var options = provider.GetRequiredService<IOptions<AppOptions>>();
-        return new Gateway(options);
+        var logger = provider.GetRequiredService<ILogger<Gateway>>();
+        
+        return new Gateway(options, logger);
     }
 );
 
