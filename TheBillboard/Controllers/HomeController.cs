@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using TheBillboard.Abstract;
+using TheBillboard.Gatweways;
 using TheBillboard.Models;
 
 namespace TheBillboard.Controllers;
@@ -7,15 +9,22 @@ namespace TheBillboard.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
-
+    private readonly IGateway _gateway;
+    
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
+        _gateway = new Gateway();
     }
 
     public IActionResult Index()
     {
         return View();
+    }
+    
+    public IActionResult List()
+    {
+        return View("MyList", _gateway.GetStudents());
     }
 
     public IActionResult Privacy()
@@ -28,4 +37,6 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
     }
+
+    
 }
