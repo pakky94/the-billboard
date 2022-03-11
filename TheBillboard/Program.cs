@@ -11,15 +11,7 @@ builder.Services
     .Bind(builder.Configuration.GetSection("AppOptions"))
     .ValidateDataAnnotations();
 
-builder.Services.AddSingleton<IGateway>(provider =>
-    {
-        var options = provider.GetRequiredService<IOptions<AppOptions>>();
-        var logger = provider.GetRequiredService<ILogger<Gateway>>();
-        
-        return new Gateway(options, logger);
-    }
-);
-
+builder.Services.AddSingleton<IGateway, Gateway>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
