@@ -17,6 +17,12 @@ body {
   margin-bottom: 60px;
 }
 
+.card {
+  text-align: start;
+  width: 30rem;
+  margin: 0 auto 0;
+}
+
 .card-title {
   text-align: start;
   font-weight: bold;
@@ -31,4 +37,9 @@ body {
   font-size: .9em;
   font-weight: lighter;
   text-align: start;
+}
+
+.card-footer {
+  font-size: .75em;
+  font-weight: lighter;
 }

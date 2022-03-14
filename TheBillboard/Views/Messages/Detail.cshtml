@@ -1,0 +1,23 @@
+﻿@model Message
+
+@{
+    ViewData["Title"] = "Message detail";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <div class="card">
+        <div class="card-header">
+            <small class="text-muted">Id: <strong>@Model.Id</strong></small>
+        </div>
+        <div class="d-flex flex-column card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@Model.Author</h6>
+            <p class="card-text">@Model.Body</p>
+        </div>
+        <div class="d-flex flex-column align-items-end card-footer">
+            <div><small class="text-muted"><strong>Created at:</strong> @Model.FormattedCreatedAt</small></div>
+            <div><small class="text-muted"><strong>Updated at:</strong> @Model.FormattedUpdatedAt</small></div>
+        </div>
+    </div>
+</div>

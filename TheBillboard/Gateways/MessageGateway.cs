@@ -5,11 +5,12 @@ namespace TheBillboard.Gateways;
 
 public class MessageGateway : IMessageGateway  
 {
-    public IEnumerable<Message> GetMessages()
+    private static readonly IEnumerable<Message> Messages = new List<Message>()
     {
-        return new Message[]
-        {
-            new("Hello World!", "What A Wonderful World!", "Alberto", DateTime.Now, DateTime.Now, 1)
-        };
-    }
+        new ("Hello  World!", "What A Wonderful World!", "Alberto", DateTime.Now, DateTime.Now, 1),
+    };
+    
+    public IEnumerable<Message> GetMessages() => Messages;
+
+    public Message? GetMessage(int id) => Messages.SingleOrDefault(message => message.Id == id);
 }

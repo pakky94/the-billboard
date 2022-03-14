@@ -17,4 +17,10 @@ public class MessagesController : Controller
         var messages = _messageGateway.GetMessages();
         return View(messages);
     }
+    
+    public IActionResult Detail(int id)
+    {
+        var message = _messageGateway.GetMessage(id);
+        return View(message);
+    }
 }
