@@ -27,7 +27,7 @@ public class HomeController : Controller
         return View("MyList", _gateway.GetStudents());
     }
 
-    public IActionResult Privacy()
+    public IActionResult About()
     {
         return View();
     }
