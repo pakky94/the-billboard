@@ -16,3 +16,19 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.card-title {
+  text-align: start;
+  font-weight: bold;
+}
+
+.card-subtitle {
+  font-size: .75em;
+  text-align: start;
+}
+
+.card-body {
+  font-size: .9em;
+  font-weight: lighter;
+  text-align: start;
+}
