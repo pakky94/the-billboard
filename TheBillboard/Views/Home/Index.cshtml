@@ -6,6 +6,6 @@
     <h1 class="display-4">@ViewData["Title"]</h1>
     <h5>You type it, we post it!</h5>
 
-    @Html.ActionLink("Get Started", "Index", "Messages");
-    <a asp-action="About">About</a>
+    @Html.ActionLink("Get Started", "Index", "Messages", default, new { @class = "btn btn-outline-secondary w-25" })
+    <a class="btn btn-outline-secondary w-25" asp-action="About">About</a>
 </div>
