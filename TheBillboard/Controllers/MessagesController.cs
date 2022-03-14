@@ -23,4 +23,10 @@ public class MessagesController : Controller
         var message = _messageGateway.GetMessage(id);
         return View(message);
     }
+
+    public IActionResult Delete(int id)
+    {
+        _messageGateway.DeleteMessage(id);
+        return RedirectToAction("Index");
+    }
 }

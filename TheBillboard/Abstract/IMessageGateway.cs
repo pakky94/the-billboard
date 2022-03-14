@@ -6,4 +6,5 @@ public interface IMessageGateway
 {
     IEnumerable<Message> GetMessages();
     Message? GetMessage(int id);
+    void DeleteMessage(int id);
 }

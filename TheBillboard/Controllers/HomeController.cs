@@ -22,9 +22,9 @@ public class HomeController : Controller
         return View();
     }
     
-    public IActionResult List()
+    public IActionResult Students()
     {
-        return View("MyList", _studentGateway.GetStudents());
+        return View("Students", _studentGateway.GetStudents());
     }
 
     public IActionResult About()
