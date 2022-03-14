@@ -2,14 +2,14 @@
 using TheBillboard.Abstract;
 using TheBillboard.Options;
 
-namespace TheBillboard.Gatweways;
+namespace TheBillboard.Gateways;
 
-public class Gateway : IGateway
+public class StudentStudentGateway : IStudentGateway
 {
-    private readonly ILogger<Gateway> _logger;
+    private readonly ILogger<StudentStudentGateway> _logger;
     private readonly AppOptions _options;
 
-    public Gateway(IOptions<AppOptions> options, ILogger<Gateway> logger)
+    public StudentStudentGateway(IOptions<AppOptions> options, ILogger<StudentStudentGateway> logger)
     {
         _logger = logger;
         _options = options.Value;

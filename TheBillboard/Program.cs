@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Options;
 using TheBillboard.Abstract;
-using TheBillboard.Gatweways;
+using TheBillboard.Gateways;
 using TheBillboard.Options;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +11,8 @@ builder.Services
     .Bind(builder.Configuration.GetSection("AppOptions"))
     .ValidateDataAnnotations();
 
-builder.Services.AddSingleton<IGateway, Gateway>();
+builder.Services.AddSingleton<IStudentGateway, StudentStudentGateway>();
+builder.Services.AddSingleton<IMessageGateway, MessageGateway>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

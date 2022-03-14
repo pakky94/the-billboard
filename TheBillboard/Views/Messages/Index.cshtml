@@ -1,7 +1,16 @@
-﻿@{
+﻿@model IEnumerable<Message>
+
+@{
     ViewData["Title"] = "Messages";
 }
 
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
+
+    <ul>
+        @foreach (var message in Model)
+        {
+            <li>@message.Title</li>
+        }
+    </ul>
 </div>

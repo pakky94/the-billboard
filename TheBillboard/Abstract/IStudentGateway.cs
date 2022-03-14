@@ -1,6 +1,6 @@
 ﻿namespace TheBillboard.Abstract;
 
-public interface IGateway
+public interface IStudentGateway
 {
     IEnumerable<string> GetStudents();
 }
