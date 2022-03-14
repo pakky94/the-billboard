@@ -4,7 +4,8 @@ namespace TheBillboard.Abstract;
 
 public interface IMessageGateway
 {
-    IEnumerable<Message> GetMessages();
-    Message? GetMessage(int id);
-    void DeleteMessage(int id);
+    IEnumerable<Message> GetAll();
+    Message? GetById(int id);
+    Message Create(Message message);
+    void Delete(int id);
 }
