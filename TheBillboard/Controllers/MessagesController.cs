@@ -22,9 +22,15 @@ public class MessagesController : Controller
     }
 
     [HttpPost]
-    public void Create(Message message) 
+    public IActionResult Create(Message message) 
     {
-        _logger.LogInformation($"Message received: {message.Title}");   
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+        
+        _logger.LogInformation($"Message received: {message.Title}");
+        return RedirectToAction("Index");
     }
     
     public IActionResult Detail(int id)
