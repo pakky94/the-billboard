@@ -7,16 +7,19 @@ public class MessageGateway : IMessageGateway
 {
     private ICollection<Message> _messages = new List<Message>()
     {
-        new("Hello  World!", "What A Wonderful World!", "Alberto", DateTime.Now.AddHours(-2), DateTime.Now.AddHours(-1), 1),
-        new("Hello  World!", "What A Wonderful World!", "Alberto", DateTime.Now, DateTime.Now, 2),
+        new("Hello  World!", "What A Wonderful World!", 1, DateTime.Now.AddHours(-2), DateTime.Now.AddHours(-1), 1),
+        new("Hello  World!", "What A Wonderful World!", 1, DateTime.Now, DateTime.Now, 2),
     };
+    private int nextId = 3;
     
     public IEnumerable<Message> GetAll() => _messages;
 
     public Message? GetById(int id) => _messages.SingleOrDefault(message => message.Id == id);
-    
+
     public Message Create(Message message)
     {
+        message = message with { Id = nextId };
+        nextId++;
         _messages.Add(message);
         return message;
     }

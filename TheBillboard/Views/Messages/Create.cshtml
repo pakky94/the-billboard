@@ -19,10 +19,13 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div>
-                <label for="body">Author</label>
-                <input asp-for="Author" type="text" class="form-control" placeholder="Author">
-                <span asp-validation-for="Author" class="text-danger"></span>
-            </div>
+                <select asp-for="AuthorId">
+                    @foreach(var author in (IEnumerable<Author>)ViewData["Authors"])
+                    {
+                        <option value="@author.Id">@author.ToString()</option>
+                    }
+                </select>
+*@            </div>
             <div>
                 <label for="body">Message</label>
                 <textarea asp-for="Body" type="text" class="form-control" placeholder="Enter message"></textarea> 
