@@ -30,7 +30,7 @@ public class MessagesController : Controller
     {
         if (!ModelState.IsValid)
         {
-            return View();
+            return View(new MessageCreationViewModel(message, _authorGateway.GetAll()));
         }
 
         if (message.Id == default)
@@ -54,14 +54,10 @@ public class MessagesController : Controller
     
     public IActionResult Create(int? id)
     {
-        ViewData["Authors"] = _authorGateway.GetAll();
+        var message = id is not null ? _messageGateway.GetById((int)id) : null;
+        var viewModel = new MessageCreationViewModel(message, _authorGateway.GetAll());
 
-        if (id is not null)
-        {
-            return View(_messageViewGateway.GetById((int)id));
-        }
-
-        return View();
+        return View(viewModel);
     }
 
     public IActionResult Delete(int id)

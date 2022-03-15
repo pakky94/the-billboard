@@ -1,4 +1,4 @@
-﻿@model Message
+﻿@model MessageCreationViewModel
 
 @{
     ViewData["Title"] = "Message detail";
@@ -9,18 +9,18 @@
     
     <form class="card" asp-action="Create" asp-controller="Messages" method="post">
         <div class="form-group">
-            @if (Model is not null)
+            @if (Model.Message is not null)
             {
-                <input asp-for="Id" type="hidden" value="@Model.Id" />
+                <input asp-for="@Model.Message.Id" type="hidden" value="@Model.Message.Id" />
             }
             <div>
                 <label for="body">Title</label>
-                <input asp-for="Title" type="text" class="form-control" placeholder="Title">
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <input asp-for="Message!.Title" type="text" class="form-control" placeholder="Title">
+                <span asp-validation-for="Message!.Title" class="text-danger"></span>
             </div>
             <div>
-                <select asp-for="AuthorId">
-                    @foreach(var author in (IEnumerable<Author>)ViewData["Authors"])
+                <select asp-for="Message!.AuthorId">
+                    @foreach(var author in Model.Authors)
                     {
                         <option value="@author.Id">@author.ToString()</option>
                     }
@@ -28,8 +28,8 @@
             </div>
             <div>
                 <label for="body">Message</label>
-                <textarea asp-for="Body" type="text" class="form-control" placeholder="Enter message"></textarea> 
-                <span asp-validation-for="Body" class="text-danger"></span>
+                <textarea asp-for="Message!.Body" type="text" class="form-control" placeholder="Enter message"></textarea> 
+                <span asp-validation-for="Message!.Body" class="text-danger"></span>
             </div>
         </div>
         

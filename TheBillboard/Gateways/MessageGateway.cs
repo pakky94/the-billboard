@@ -18,7 +18,7 @@ public class MessageGateway : IMessageGateway
 
     public Message Create(Message message)
     {
-        message = message with { Id = nextId };
+        message = message with { Id = nextId, CreatedAt = DateTime.Now, UpdatedAt = DateTime.Now };
         nextId++;
         _messages.Add(message);
         return message;
