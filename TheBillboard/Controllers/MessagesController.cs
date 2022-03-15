@@ -29,6 +29,16 @@ public class MessagesController : Controller
             return View();
         }
         
+        if (message.Id == default)
+        {
+            _messageGateway.Create(message);
+        }
+
+        else
+        {
+            _messageGateway.Update(message);
+        }
+
         _logger.LogInformation($"Message received: {message.Title}");
         return RedirectToAction("Index");
     }
@@ -39,8 +49,13 @@ public class MessagesController : Controller
         return View(message);
     }
     
-    public IActionResult Create()
+    public IActionResult Create(int? id)
     {
+        if (id is not null)
+        {
+            return View(_messageGateway.GetById((int)id));
+        }
+
         return View();
     }
 

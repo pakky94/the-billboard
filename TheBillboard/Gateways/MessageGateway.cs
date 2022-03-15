@@ -25,4 +25,15 @@ public class MessageGateway : IMessageGateway
         _messages = _messages
             .Where(message => message.Id != id)
             .ToList();
+
+    public void Update(Message message)
+    {
+        _messages = _messages
+            .Where(m => m.Id != message.Id)
+            .ToList();
+
+        message = message with { UpdatedAt = DateTime.Now };
+
+        _messages.Add(message);
+    }
 }
