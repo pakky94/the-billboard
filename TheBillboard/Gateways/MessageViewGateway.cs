@@ -16,11 +16,14 @@ namespace TheBillboard.Gateways
         
         private MessageViewModel InjectAuthor(Message message)
         {
-            return new MessageViewModel(message, _authorGateway.GetById(message.AuthorId));
+            return new MessageViewModel(message, _authorGateway.GetById(message.AuthorId) ?? new Author("Cancellato"));
         }
 
         public IEnumerable<MessageViewModel> GetAll() => _messageGateway.GetAll().Select(InjectAuthor);
 
-        public MessageViewModel? GetById(int id) => InjectAuthor(_messageGateway.GetById(id));
+        public MessageViewModel? GetById(int id) {
+            var message = _messageGateway.GetById(id);
+            return message is null ? null : InjectAuthor(message);
+        }
     }
 }

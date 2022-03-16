@@ -15,11 +15,11 @@
             }
             <div>
                 <label for="body">Title</label>
-                <input asp-for="Message!.Title" type="text" class="form-control" placeholder="Title">
-                <span asp-validation-for="Message!.Title" class="text-danger"></span>
+                <input asp-for="Message.Title" type="text" class="form-control" placeholder="Title">
+                <span asp-validation-for="Message.Title" class="text-danger"></span>
             </div>
             <div>
-                <select asp-for="Message!.AuthorId">
+                <select asp-for="Message.AuthorId" class="form-select">
                     @foreach(var author in Model.Authors)
                     {
                         <option value="@author.Id">@author.ToString()</option>
@@ -28,8 +28,8 @@
             </div>
             <div>
                 <label for="body">Message</label>
-                <textarea asp-for="Message!.Body" type="text" class="form-control" placeholder="Enter message"></textarea> 
-                <span asp-validation-for="Message!.Body" class="text-danger"></span>
+                <textarea asp-for="Message.Body" type="text" class="form-control" placeholder="Enter message"></textarea> 
+                <span asp-validation-for="Message.Body" class="text-danger"></span>
             </div>
         </div>
         
