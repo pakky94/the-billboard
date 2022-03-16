@@ -9,7 +9,7 @@ namespace TheBillboard.Abstract
         Author? GetById(int id);
 
         Author Create(Author author);
-        //void Update(Message message);
+
         void Delete(int id);
     }
 }

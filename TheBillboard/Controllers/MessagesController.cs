@@ -9,22 +9,25 @@ public class MessagesController : Controller
 {
     private readonly IMessageGateway _messageGateway;
     private readonly IAuthorGateway _authorGateway;
-    private readonly IMessageViewGateway _messageViewGateway;
     private readonly ILogger<MessagesController> _logger;
 
-    public MessagesController(IMessageGateway messageGateway, ILogger<MessagesController> logger, IAuthorGateway authorGateway, IMessageViewGateway messageViewGateway)
+    public MessagesController(IMessageGateway messageGateway, ILogger<MessagesController> logger, IAuthorGateway authorGateway)
     {
-        _messageGateway = messageGateway;
         _logger = logger;
+        _messageGateway = messageGateway;
         _authorGateway = authorGateway;
-        _messageViewGateway = messageViewGateway;
     }
 
     public IActionResult Index()
     {
-        var messages = _messageViewGateway.GetAll();
-        var model = new MessagesIndexViewModel(new MessageCreationViewModel(new Message(), _authorGateway.GetAll()), messages);
-        return View(model);
+        var messages = _messageGateway.GetAll();
+        var authors = _authorGateway.GetAll();
+
+        var messagesWithAuthor = messages.Select(message => MatchAuthorToMessage(message, authors));
+
+        var createViewModel = new MessageCreationViewModel(new Message(), authors);
+        var indexModel = new MessagesIndexViewModel(createViewModel, messagesWithAuthor);
+        return View(indexModel);
     }
 
     [HttpGet]
@@ -36,7 +39,8 @@ public class MessagesController : Controller
         {
             // errore
             return View("Error");
-        } else
+        }
+        else
         {
             var viewModel = new MessageCreationViewModel(message, _authorGateway.GetAll());
             return View(viewModel);
@@ -44,7 +48,7 @@ public class MessagesController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Message message) 
+    public IActionResult Create(Message message)
     {
         if (!ModelState.IsValid)
         {
@@ -63,21 +67,27 @@ public class MessagesController : Controller
         _logger.LogInformation($"Message received: {message.Title}");
         return RedirectToAction("Index");
     }
-    
+
     public IActionResult Detail(int id)
     {
-        var message = _messageViewGateway.GetById(id);
+        var message = _messageGateway.GetById(id);
         if (message is null)
         {
             // errore
             return View("Error");
         }
-        return View(message);
+
+        var authors = _authorGateway.GetAll();
+        var messageWithAuthor = MatchAuthorToMessage(message, authors);
+        return View(messageWithAuthor);
     }
-    
+
     public IActionResult Delete(int id)
     {
         _messageGateway.Delete(id);
         return RedirectToAction("Index");
     }
+
+    private MessageWithAuthor MatchAuthorToMessage(Message message, IEnumerable<Author> authors)
+        => new MessageWithAuthor(message, authors.FirstOrDefault(a => a.Id == message.AuthorId, new Author("Unknown Author")));
 }

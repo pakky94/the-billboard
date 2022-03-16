@@ -14,7 +14,6 @@ builder.Services
 builder.Services.AddSingleton<IStudentGateway, StudentStudentGateway>();
 builder.Services.AddSingleton<IMessageGateway, MessageGateway>();
 builder.Services.AddSingleton<IAuthorGateway, AuthorGateway>();
-builder.Services.AddSingleton<IMessageViewGateway, MessageViewGateway>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
