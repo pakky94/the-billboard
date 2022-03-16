@@ -6,8 +6,9 @@
 
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
-    
+    <h3 class="display-4">New Message</h3>
     @await Html.PartialAsync("MessageCreate", Model.MessageCreationViewModel)
+    <h3 class="display-4">Message List</h3>
     <ul class="list-group list-group-flush align-items-center">
         @foreach (var message in Model.Messages)
         {
