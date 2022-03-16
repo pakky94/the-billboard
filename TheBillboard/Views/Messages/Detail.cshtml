@@ -7,9 +7,6 @@
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
     <div class="card">
-        <div class="card-header">
-            <small class="text-muted">Id: <strong>@Model.Message.Id</strong></small>
-        </div>
         <div class="d-flex flex-column card-body">
             <h5 class="card-title">@Model.Message.Title</h5>
             <h6 class="card-subtitle mb-2 text-muted">@Model.Author.ToString()</h6>

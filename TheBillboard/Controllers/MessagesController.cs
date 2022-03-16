@@ -25,6 +25,22 @@ public class MessagesController : Controller
         return View(messages);
     }
 
+    [HttpGet]
+    public IActionResult Create(int? id)
+    {
+        var message = id is not null ? _messageGateway.GetById((int)id) : new Message();
+
+        if (message is null)
+        {
+            // errore
+            return View("Error");
+        } else
+        {
+            var viewModel = new MessageCreationViewModel(message, _authorGateway.GetAll());
+            return View(viewModel);
+        }
+    }
+
     [HttpPost]
     public IActionResult Create(Message message) 
     {
@@ -49,17 +65,14 @@ public class MessagesController : Controller
     public IActionResult Detail(int id)
     {
         var message = _messageViewGateway.GetById(id);
+        if (message is null)
+        {
+            // errore
+            return View("Error");
+        }
         return View(message);
     }
     
-    public IActionResult Create(int? id)
-    {
-        var message = id is not null ? _messageGateway.GetById((int)id) : null;
-        var viewModel = new MessageCreationViewModel(message, _authorGateway.GetAll());
-
-        return View(viewModel);
-    }
-
     public IActionResult Delete(int id)
     {
         _messageGateway.Delete(id);

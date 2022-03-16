@@ -16,7 +16,7 @@ namespace TheBillboard.Gateways
         
         private MessageViewModel InjectAuthor(Message message)
         {
-            return new MessageViewModel(message, _authorGateway.GetById(message.AuthorId) ?? new Author("Cancellato"));
+            return new MessageViewModel(message, _authorGateway.GetById(message.AuthorId) ?? new Author("Unknown Author"));
         }
 
         public IEnumerable<MessageViewModel> GetAll() => _messageGateway.GetAll().Select(InjectAuthor);
