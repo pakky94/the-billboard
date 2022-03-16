@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MessageViewModel>
+﻿@model MessagesIndexViewModel
 
 @{
     ViewData["Title"] = "Messages";
@@ -7,9 +7,9 @@
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
     
-    @Html.ActionLink("Create New Message", "Create", "Messages", default, new { @class = "btn btn-sm btn-outline-danger w-25" })
+    @await Html.PartialAsync("MessageCreate", Model.MessageCreationViewModel)
     <ul class="list-group list-group-flush align-items-center">
-        @foreach (var message in Model)
+        @foreach (var message in Model.Messages)
         {
             <li class="list-group-item">
                 <div class="card">

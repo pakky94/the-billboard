@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheBillboard.Abstract;
 using TheBillboard.Models;
+using TheBillboard.ViewModels;
 
 namespace TheBillboard.Controllers;
 
@@ -22,7 +23,8 @@ public class MessagesController : Controller
     public IActionResult Index()
     {
         var messages = _messageViewGateway.GetAll();
-        return View(messages);
+        var model = new MessagesIndexViewModel(new MessageCreationViewModel(new Message(), _authorGateway.GetAll()), messages);
+        return View(model);
     }
 
     [HttpGet]

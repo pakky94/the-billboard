@@ -4,8 +4,8 @@ namespace TheBillboard.Abstract
 {
     public interface IMessageViewGateway
     {
-        public IEnumerable<MessageViewModel> GetAll();
+        public IEnumerable<MessageWithAuthor> GetAll();
 
-        public MessageViewModel? GetById(int id);
+        public MessageWithAuthor? GetById(int id);
     }
 }
