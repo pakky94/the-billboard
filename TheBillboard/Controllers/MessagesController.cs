@@ -37,7 +37,6 @@ public class MessagesController : Controller
 
         if (message is null)
         {
-            // errore
             return View("Error");
         }
         else
@@ -73,7 +72,6 @@ public class MessagesController : Controller
         var message = _messageGateway.GetById(id);
         if (message is null)
         {
-            // errore
             return View("Error");
         }
 
